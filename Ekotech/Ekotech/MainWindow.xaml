@@ -5,7 +5,7 @@
         xmlns:src="clr-namespace:Ekotech"
         Title="Ekotech 2015" Height="400" Width="550">
     <Grid>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="314" Margin="10,10,0,0" VerticalAlignment="Top" Width="194">
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="314" Margin="10,10,0,0" VerticalAlignment="Top" Width="205">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -14,27 +14,29 @@
                         <TextBlock Text=" s,    "/>
                         <TextBlock Text="Moc = "/>
                         <TextBlock Text="{Binding Power}" />
-                        <TextBlock Text=" W"/>
+                        <TextBlock Text=" mW"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Moc skuteczna:" HorizontalAlignment="Left" Margin="263,153,0,0" VerticalAlignment="Top" Height="26" Width="97"/>
-        <Label x:Name="power" Content="---" HorizontalAlignment="Left" Margin="365,153,0,0" VerticalAlignment="Top"/>
-        <Label Content="±" HorizontalAlignment="Left" Margin="394,153,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="error" Content="---" HorizontalAlignment="Left" Margin="417,153,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="buttonDodajPomiar" Content="Dodaj pomiar" HorizontalAlignment="Left" Margin="10,329,0,0" VerticalAlignment="Top" Width="94" Click="DodajPomiar_Click"/>
-        <Button x:Name="buttonUsunPomiar" Content="Usuń pomiar" HorizontalAlignment="Left" Margin="109,329,0,0" VerticalAlignment="Top" Width="95" IsEnabled="False" Click="buttonUsunPomiar_Click"/>
-        <Label Content="Masa ciężarka:" HorizontalAlignment="Left" Margin="219,29,0,0" VerticalAlignment="Top"/>
-        <Label Content="±" HorizontalAlignment="Left" Margin="399,29,0,0" VerticalAlignment="Top"/>
-        <Label Content="Długość odcinka &#xA;pomiarowego:" HorizontalAlignment="Left" Margin="219,68,0,0" VerticalAlignment="Top" Width="100"/>
-        <Label Content="±" HorizontalAlignment="Left" Margin="399,83,0,0" VerticalAlignment="Top"/>
-        <xctk:DoubleUpDown x:Name="mass" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="324,32,0,0" VerticalAlignment="Top" Width="75"/>
-        <xctk:DoubleUpDown x:Name="massError" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="417,32,0,0" VerticalAlignment="Top" Width="75"/>
-        <xctk:DoubleUpDown x:Name="length" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="324,86,0,0" VerticalAlignment="Top" Width="75"/>
-        <xctk:DoubleUpDown x:Name="lengthError" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="417,86,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="g" HorizontalAlignment="Left" Margin="492,29,0,0" VerticalAlignment="Top" Width="40"/>
-        <Label Content="cm" HorizontalAlignment="Left" Margin="492,83,0,0" VerticalAlignment="Top" Width="40"/>
-        <Label Content="W" HorizontalAlignment="Left" Margin="446,153,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label Content="Moc skuteczna:" HorizontalAlignment="Left" Margin="235,198,0,0" VerticalAlignment="Top" Height="26" Width="97"/>
+        <Label x:Name="power" Content="---" HorizontalAlignment="Left" Margin="350,198,0,0" VerticalAlignment="Top"/>
+        <Label Content="±" HorizontalAlignment="Left" Margin="394,198,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="error" Content="---" HorizontalAlignment="Left" Margin="430,198,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="buttonDodajPomiar" Content="Dodaj pomiar" HorizontalAlignment="Left" Margin="10,329,0,0" VerticalAlignment="Top" Width="100" Click="DodajPomiar_Click"/>
+        <Button x:Name="buttonUsunPomiar" Content="Usuń pomiar" HorizontalAlignment="Left" Margin="115,329,0,0" VerticalAlignment="Top" Width="100" IsEnabled="False" Click="buttonUsunPomiar_Click"/>
+        <Label Content="Masa ciężarka:" HorizontalAlignment="Left" Margin="221,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="±" HorizontalAlignment="Left" Margin="401,85,0,0" VerticalAlignment="Top"/>
+        <Label Content="Długość odcinka &#xA;pomiarowego:" HorizontalAlignment="Left" Margin="221,113,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label Content="±" HorizontalAlignment="Left" Margin="401,128,0,0" VerticalAlignment="Top"/>
+        <xctk:DoubleUpDown x:Name="mass" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="326,88,0,0" VerticalAlignment="Top" Width="75"/>
+        <xctk:DoubleUpDown x:Name="massError" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="419,88,0,0" VerticalAlignment="Top" Width="75"/>
+        <xctk:DoubleUpDown x:Name="length" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="326,131,0,0" VerticalAlignment="Top" Width="75"/>
+        <xctk:DoubleUpDown x:Name="lengthError" Value="0.0" Increment="0.1" Minimum="0.0" Maximum="1000.0" FormatString="F2" HorizontalAlignment="Left" Margin="419,131,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="g" HorizontalAlignment="Left" Margin="494,85,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label Content="cm" HorizontalAlignment="Left" Margin="494,128,0,0" VerticalAlignment="Top" Width="40"/>
+        <Label Content="mW" HorizontalAlignment="Left" Margin="478,198,0,0" VerticalAlignment="Top" Width="40"/>
+        <Image Margin="402,285,13,10" Source="in_silico_logo.png" Stretch="Fill"/>
+        <Image Margin="236,10,24,317" Source="ekotech2015-e1424080457976.png" Stretch="Fill"/>
     </Grid>
 </Window>
