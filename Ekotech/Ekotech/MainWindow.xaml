@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:src="clr-namespace:Ekotech"
+        ResizeMode="NoResize"
         Title="Ekotech 2015" Height="400" Width="550">
     <Grid>
         <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="314" Margin="10,10,0,0" VerticalAlignment="Top" Width="205">
@@ -36,7 +37,11 @@
         <Label Content="g" HorizontalAlignment="Left" Margin="494,85,0,0" VerticalAlignment="Top" Width="40"/>
         <Label Content="cm" HorizontalAlignment="Left" Margin="494,128,0,0" VerticalAlignment="Top" Width="40"/>
         <Label Content="mW" HorizontalAlignment="Left" Margin="478,198,0,0" VerticalAlignment="Top" Width="40"/>
-        <Image Margin="402,285,13,10" Source="in_silico_logo.png" Stretch="Fill"/>
         <Image Margin="236,10,24,317" Source="ekotech2015-e1424080457976.png" Stretch="Fill"/>
+        <TextBlock HorizontalAlignment="Left" Margin="420,333,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            © Insilico-lab 2015
+        </TextBlock>
+        <Button x:Name="buttonZapisz" Content="Zapisz do pliku" HorizontalAlignment="Left" Margin="257,329,0,0" VerticalAlignment="Top" Width="97" IsEnabled="False" Click="ButtonZapisz_Click"/>
+
     </Grid>
 </Window>

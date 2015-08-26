@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 using Xceed.Wpf.Toolkit;
+using Microsoft.Win32;
+using System.IO;
+using System.Threading;
 
 namespace Ekotech
 {
@@ -29,6 +32,8 @@ namespace Ekotech
         {
             InitializeComponent();
 
+            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
             _pomiary = new List<Pomiar>();
             this.listBox.ItemsSource = _pomiary;
         }
@@ -41,7 +46,7 @@ namespace Ekotech
 
             if (addPomiarWindow.ShowDialog() == true)
             {
-                double time = Convert.ToDouble(pomiar.Time, CultureInfo.InvariantCulture);
+                double time = Convert.ToDouble(pomiar.Time);
                 double mass = (double)this.mass.Value;
                 double height = (double)this.length.Value;
                 double power = (mass * _g * height / time)/10000.0;
@@ -58,6 +63,7 @@ namespace Ekotech
                     this.massError.IsEnabled = false;
                     this.length.IsEnabled = false;
                     this.lengthError.IsEnabled = false;
+                    this.buttonZapisz.IsEnabled = true;
                 }
                 else
                 {
@@ -66,6 +72,7 @@ namespace Ekotech
                     this.massError.IsEnabled = true;
                     this.length.IsEnabled = true;
                     this.lengthError.IsEnabled = true;
+                    this.buttonZapisz.IsEnabled = false;
                 }
 
                 Calculate();
@@ -93,6 +100,7 @@ namespace Ekotech
                 this.massError.IsEnabled = false;
                 this.length.IsEnabled = false;
                 this.lengthError.IsEnabled = false;
+                this.buttonZapisz.IsEnabled = true;
             }
             else
             {
@@ -101,6 +109,7 @@ namespace Ekotech
                 this.massError.IsEnabled = true;
                 this.length.IsEnabled = true;
                 this.lengthError.IsEnabled = true;
+                this.buttonZapisz.IsEnabled = false;
             }
 
             Calculate();
@@ -116,7 +125,7 @@ namespace Ekotech
             List<double> pomiary = new List<double>();
             foreach (var pomiar in _pomiary)
             {
-                double time = Convert.ToDouble(pomiar.Time, CultureInfo.InvariantCulture);
+                double time = Convert.ToDouble(pomiar.Time);
                 pomiary.Add(time);
             }
 
@@ -143,7 +152,7 @@ namespace Ekotech
 
             double average = (mass * _g * height / averageTime)/10000.0;
 
-            string errorString = error.ToString(CultureInfo.InvariantCulture);
+            string errorString = error.ToString();
             string errorNewString = "";
 
             Console.WriteLine(errorString);
@@ -157,7 +166,7 @@ namespace Ekotech
             string averageNewString = "";
             if (errorNewString != "---")
             {
-                double errorNewDouble = Convert.ToDouble(errorNewString, CultureInfo.InvariantCulture);
+                double errorNewDouble = Convert.ToDouble(errorNewString);
                 if ((errorNewDouble / average) > 0.1)
                 {
                     errorNewString += errorString[errorNewString.Length];
@@ -181,6 +190,36 @@ namespace Ekotech
             this.power.Content = averageNewString;
             this.error.Content = errorNewString;
 
+        }
+
+        private void ButtonZapisz_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Text file (*.txt)|*.txt";
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (dialog.ShowDialog() == true)
+            {
+                double mass = (double)this.mass.Value;
+                double height = (double)this.length.Value;
+                double massError = (double)this.massError.Value;
+                double heightError = (double)this.lengthError.Value;
+
+                string data = ""; 
+                data += "Masa = " + mass.ToString() + " +- " + massError.ToString() + " g \r\n";
+                data += "Dlugosc = " + height.ToString() + " +- " + heightError.ToString() + " cm \r\n";
+                data += "\r\n";
+                data += "Pomiary czasu i mocy:" + "\r\n";
+
+                foreach (Pomiar pomiar in _pomiary)
+                {
+                    data += "Czas = " + pomiar.Time + " s  " + "Moc = " + pomiar.Power + " mW \r\n"; 
+                }
+                data += "\r\n";
+
+                data += "Moc skuteczna = " + this.power.Content + " +- " + this.error.Content + " mW \r\n";
+
+                File.WriteAllText(dialog.FileName, data);
+            }
         }
     }
 
