@@ -25,6 +25,22 @@ namespace Ekotech
     /// </summary>
     public partial class MainWindow : Window
     {
+        private double[] T = {0.0, 235.784, 19.206, 9.219, 6.620, 5.507, 4.904, 4.530, 4.277, 4.094, 3.957, 3.850, 3.764, 3.694,
+                             3.636, 3.586, 3.544, 3.507, 3.475, 3.447, 3.422, 3.400, 3.380, 3.361, 3.345, 3.330, 3.316, 3.303, 3.291, 3.280, 3.270 };
+
+        private double GetT(int v)
+        {
+            if (v <= 30)
+            {
+                return T[v];
+            }
+            else
+            {
+                return 3.0;
+            }
+
+        }
+
         public List<Pomiar> _pomiary;
         public double _g = 981.0; // cm/s^2
 
@@ -142,7 +158,7 @@ namespace Ekotech
             {
                 errorTime += Math.Pow(pomiar - averageTime, 2);
             }
-            errorTime = 3.0 * Math.Sqrt(errorTime / (pomiary.Count - 1) ) / Math.Sqrt( (double)pomiary.Count );
+            errorTime = GetT(pomiary.Count - 1) * Math.Sqrt(errorTime / (pomiary.Count - 1) ) / Math.Sqrt( (double)pomiary.Count );
 
             double errorPowerMass = (_g * height / averageTime) * massError;
             double errorPowerHeight = (mass * _g / averageTime) * heightError;
