@@ -168,43 +168,21 @@ namespace Ekotech
 
             double average = (mass * _g * height / averageTime)/10000.0;
 
-            string errorString = error.ToString();
-            string errorNewString = "";
+            string errorNewString = error.ToString("F2");
+            if (errorNewString[0] == 'N') errorNewString = "---";
 
-            Console.WriteLine(errorString);
-            for (int i = 0; i < errorString.Length; i++)
-            {
-                errorNewString += errorString[i];
-                if (errorString[i] == 'N') { errorNewString="---"; break; }
-                if ((errorString[i] != '.') && (errorString[i] != ',') && (errorString[i] != '0')) break;
-            }
+            decimal averageDecimal = (decimal)average;
+            string averageNewString = "---";
 
-            string averageNewString = "";
-            if (errorNewString != "---")
-            {
-                double errorNewDouble = Convert.ToDouble(errorNewString);
-                if ((errorNewDouble / average) > 0.1)
-                {
-                    errorNewString += errorString[errorNewString.Length];
-                }
+            averageNewString = Decimal.Round(averageDecimal, 2).ToString();
 
-                string averageString = average.ToString();
-                
-                for (int i = 0; i < errorNewString.Length; i++)
-                {
-                    averageNewString += averageString[i];
-                }
-            }
-            else
-            {
-                averageNewString = "---";
-            }
+            if (errorNewString == "---") averageNewString = "---";
 
-
-            
 
             this.power.Content = averageNewString;
             this.error.Content = errorNewString;
+
+
 
         }
 
